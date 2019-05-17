@@ -1,6 +1,6 @@
 package test;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
 import test1.UserDO;
 import test1.UserService;

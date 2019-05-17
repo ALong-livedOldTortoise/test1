@@ -1,14 +1,19 @@
 package test;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.alibaba.fastjson.JSON;
+import com.juzifenqi.core.ServiceResult;
+import com.juzifenqi.order.service.IOrderService;
+import com.juzifenqi.order.vo.OrderDetailVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import service.workorder.IWorkOrderService;
 import test1.UserDO;
 import test1.UserService;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author jyl
@@ -18,19 +23,17 @@ import java.util.List;
  * @since 描述
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("test")
 public class UserController {
+    @Autowired
+    IOrderService iOrderService;
 
-    @Reference
-    UserService userService;
-
-    @GetMapping("/findById/{id}")
-    public UserDO findById(@PathVariable Long id){
-        return userService.findById(id);
+    @PostMapping("test1")
+    public String findById(@RequestBody Map<String,String> param){
+        OrderDetailVO orderDetailVO = new OrderDetailVO();
+        orderDetailVO.setOrderSn(param.get("orderSn"));
+        orderDetailVO.setTraceId(11111L);
+        return JSON.toJSONString(iOrderService.getOrderDetailById(orderDetailVO));
     }
 
-    @GetMapping("/listUser")
-    public List<UserDO> listUser(){
-        return userService.listUser();
-    }
 }

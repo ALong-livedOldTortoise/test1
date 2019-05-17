@@ -3,6 +3,7 @@ package test;
 import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author jyl
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @see: 背景
  * @since 描述
  */
+@ComponentScan(basePackages = {"test","com.jzfq.track","service","com.juzifenqi.alita.dubbo","com.juzifenqi.order"})
 @SpringBootApplication
 @EnableDubboConfiguration
 public class ConsumerApplication {

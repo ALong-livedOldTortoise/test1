@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <jmxConfigurator/>
+
+    <property name="log_home" value="/data/log/erp"/>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_home}/mall_core.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_home}/mall_core.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} %X{traceId} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.juzi" level="DEBUG"/>
+    <logger name="com.juzi.shop.dao" level="DEBUG" />
+
+    <root level="INFO">
+        <appender-ref ref="rollingFile"/>
+    </root>
+
+    <logger name="org.springframework.jndi" level="WARN"/>
+    <logger name="org.springframework.scheduling" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+
+</configuration>
